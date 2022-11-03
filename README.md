@@ -1,6 +1,6 @@
 # Animal-Feeding-Phase-II
 
-## Aim:
+## Aim:To develop a animal feeding game-Phase-2 using unity engine with C#.
 
 ## Algorithm:
 ### Random Animal Stampede
@@ -19,8 +19,70 @@
 ### Step 7: For all the animal prefabs and food in th inspector (below the  layer ) drop down the override option and choose apply all.
 
 ## Program:
+### Spawn Manger:
+```
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SpawnManager : MonoBehaviour
+{
+    public GameObject[] animalPrefabs;
+    private float spawnRangeX = 20;
+    private float spawnPosZ = 20;
+    private float startDelay = 2;
+    private float spawnInterval = 1.5f;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        InvokeRepeating("SpawnRandomAnimal", startDelay, spawnInterval);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+
+    }
+    void SpawnRandomAnimal()
+    {
+        int animalIndex = Random.Range(0, animalPrefabs.Length);
+        Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), 0, spawnPosZ);
+        Instantiate(animalPrefabs[animalIndex], spawnPos, animalPrefabs[animalIndex].transform.rotation);
+    }
+}
+
+```
+### Detect Collider:
+```
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DetectCollider : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject);
+        Destroy(other.gameObject);
+    }
+}
+```
 
 ## Output:
+![output](o1.png)
 
 ## Result:
-
+Thus,The Animal feeding game-Phase-2 using unity engine is developed successfully.
